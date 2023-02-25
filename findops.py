@@ -26,10 +26,13 @@ with open('followingoutput.txt', 'r') as f1, open('followersoutput.txt', 'r') as
     usernames1 = set(f1.read().split())
     usernames2 = set(f2.read().split())
 
-# Find the symmetric difference of the sets to get the unique usernames
+# Find the symmetric difference of the sets to get the list of users that don't follow you back
 unique_usernames = usernames1.symmetric_difference(usernames2)
 
-# Write the unique usernames to a text file called 'ops.txt'
+# Sort usernames in alphabetical order
+unique_usernames = sorted(list(unique_usernames), key=lambda x: (not x.isalnum(), x))
+
+# Write the usernames to a text file called 'ops.txt'
 if len(unique_usernames) == 0:
     print('There are no unique usernames.')
 else:
